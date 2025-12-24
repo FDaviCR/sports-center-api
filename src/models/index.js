@@ -1,9 +1,9 @@
 const sequelize = require('../config/database');
-//const Log = require('./Log');
+const Pais = require('./Paises');
 
 const db = {
     sequelize,
-    //Log,
+    Pais,
 };
 
 module.exports = db;

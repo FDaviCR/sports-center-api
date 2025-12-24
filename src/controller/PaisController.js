@@ -1,4 +1,4 @@
-const PaisService = require('../services/PaisService');
+const PaisService = require('../services/PaisesService');
 //const LogService = require('../services/LogService');
 
 

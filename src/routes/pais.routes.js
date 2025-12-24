@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const PaisController = require('../controllers/PaisController');
+const PaisController = require('../controller/PaisController');
 
 const router = Router();
 
-router.post('/pais', PaisController.store);
+//router.post('/pais', PaisController.store);
 router.get('/pais', PaisController.loadAll);
 
 

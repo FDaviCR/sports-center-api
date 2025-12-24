@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 
-const Pais = sequelize.define('Pais', {
+const Pais = sequelize.define('Paises', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -14,8 +14,7 @@ const Pais = sequelize.define('Pais', {
     },
     codigo: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        allowNull: true,
     },
     bandeira: {
         type: DataTypes.STRING,

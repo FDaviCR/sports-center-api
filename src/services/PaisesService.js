@@ -24,10 +24,9 @@ class PaisService {
         request(options, function (error, response, body) {
             if (error) throw new Error(error);
 
-            console.log(body);
-
             const countries = JSON.parse(body);
-            countries.data.forEach(country => {
+
+            countries.response.forEach(country => {
                 Pais.create({
                     nome: country.name,
                     codigo: country.code,
@@ -36,7 +35,7 @@ class PaisService {
             });
         });
 
-        return Pais.findAll();
+        return true; //Pais.findAll();
     }
 }
 
