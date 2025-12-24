@@ -3,8 +3,7 @@ const PaisController = require('../controller/PaisController');
 
 const router = Router();
 
-//router.post('/pais', PaisController.store);
-router.get('/pais', PaisController.loadAll);
-
+router.get('/paises', PaisController.loadAll);
+router.get('/list/paises', PaisController.findAll);
 
 module.exports = router;

@@ -15,7 +15,7 @@ class PaisService {
     static async loadAll() {
         var options = {
             method: 'GET',
-            url: 'https://v3.football.api-sports.io/countries',
+            url: process.env.API_URL + '/countries',
             headers: {
                 'x-apisports-key': process.env.API_KEY
             }
@@ -35,7 +35,7 @@ class PaisService {
             });
         });
 
-        return true; //Pais.findAll();
+        return Pais.findAll();
     }
 }
 
