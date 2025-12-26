@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 
-const Paises = sequelize.define('Paises', {
+const Ligas = sequelize.define('Ligas', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -12,15 +12,19 @@ const Paises = sequelize.define('Paises', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    codigo: {
+    tipo: {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    bandeira: {
+    logo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    paisDeOrigem: {
         type: DataTypes.STRING,
         allowNull: true,
     },
 });
 
 
-module.exports = Paises;
+module.exports = Ligas;

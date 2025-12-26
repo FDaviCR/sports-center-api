@@ -1,9 +1,11 @@
 const sequelize = require('../config/database');
-const Pais = require('./Paises');
+const Paises = require('./Paises');
+const Ligas = require('./Ligas');
 
 const db = {
     sequelize,
-    Pais,
+    Paises,
+    Ligas
 };
 
 module.exports = db;
