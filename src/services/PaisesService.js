@@ -1,3 +1,4 @@
+const LogService = require('../services/LogAtualizacoesService');
 const { Paises } = require('../models');
 require('dotenv').config();
 const axios = require('axios');
@@ -35,6 +36,16 @@ class PaisService {
                 })
             )
         );
+
+        if (await LogService.find('Países')) {
+            let dataAtualizacao = new Date();
+            await LogService.updateDataByTabela('Países', dataAtualizacao);
+        } else {
+            await LogService.create({
+                tabela: 'Países',
+                data: new Date(),
+            });
+        }
 
         return await Paises.findAll();
     }

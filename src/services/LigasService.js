@@ -1,3 +1,4 @@
+const LogService = require('../services/LogAtualizacoesService');
 const { Ligas } = require('../models');
 require('dotenv').config();
 const axios = require('axios');
@@ -32,6 +33,16 @@ class LigaService {
                 tipo: league.league.type,
                 logo: league.league.logo,
                 paisDeOrigem: league.country.name
+            });
+        }
+
+        if (await LogService.find('Ligas')) {
+            let dataAtualizacao = new Date();
+            await LogService.updateDataByTabela('Ligas', dataAtualizacao);
+        } else {
+            await LogService.create({
+                tabela: 'Ligas',
+                data: new Date(),
             });
         }
 

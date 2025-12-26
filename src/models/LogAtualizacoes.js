@@ -15,6 +15,14 @@ const LogAtualizacoes = sequelize.define('log_atualizacoes', {
     data: {
         type: DataTypes.DATE,
         allowNull: true,
+        get() {
+            const rawValue = this.getDataValue('data');
+            return rawValue
+                ? new Date(rawValue).toLocaleString('pt-BR', {
+                    timeZone: 'America/Sao_Paulo'
+                })
+                : null;
+        }
     }
 });
 

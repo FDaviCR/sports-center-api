@@ -10,6 +10,12 @@ class LogAtualizacoesService {
         return LogAtualizacoes.index();
     }
 
+    static async find(tabela) {
+        return LogAtualizacoes.findOne({
+            where: { tabela }
+        });
+    }
+
     static async updateDataByTabela(tabela, data) {
         return LogAtualizacoes.update(
             { data },
