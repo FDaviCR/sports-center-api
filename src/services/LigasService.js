@@ -10,7 +10,7 @@ class LigaService {
 
 
     static async findAll() {
-        return Ligas.index();
+        return Ligas.findAll();
     }
 
     static async loadAll() {

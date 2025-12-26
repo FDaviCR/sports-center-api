@@ -7,7 +7,7 @@ class LogAtualizacoesService {
     }
 
     static async findAll() {
-        return LogAtualizacoes.index();
+        return LogAtualizacoes.findAll();
     }
 
     static async find(tabela) {
