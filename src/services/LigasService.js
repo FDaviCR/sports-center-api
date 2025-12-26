@@ -1,6 +1,6 @@
 const { Ligas } = require('../models');
 require('dotenv').config();
-const request = require("request");
+const axios = require('axios');
 
 class LigaService {
     static async create(data) {
@@ -13,33 +13,31 @@ class LigaService {
     }
 
     static async loadAll() {
-        var options = {
-            method: 'GET',
-            url: process.env.API_URL + '/leagues',
-            headers: {
-                'x-apisports-key': process.env.API_KEY
+        const response = await axios.get(
+            process.env.API_URL + '/leagues',
+            {
+                headers: {
+                    'x-apisports-key': process.env.API_KEY
+                }
             }
-        };
+        );
 
-        request(options, function (error, response, body) {
-            if (error) throw new Error(error);
+        const leagues = response.data;
 
-            const leagues = JSON.parse(body);
+        await Ligas.truncate();
 
-            //console.log(leagues);
-
-            leagues.response.forEach(league => {
-                Ligas.create({
-                    nome: league.league.name,
-                    tipo: league.league.type,
-                    logo: league.league.logo,
-                    paisDeOrigem: league.country.name
-                });
+        for (const league of leagues.response) {
+            await Ligas.create({
+                nome: league.league.name,
+                tipo: league.league.type,
+                logo: league.league.logo,
+                paisDeOrigem: league.country.name
             });
-        });
+        }
 
-        return 1;//Liga.index();
+        return await Ligas.findAll();
     }
+
 }
 
 module.exports = LigaService;

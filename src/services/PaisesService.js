@@ -1,42 +1,44 @@
-const { Pais } = require('../models');
+const { Paises } = require('../models');
 require('dotenv').config();
-const request = require("request");
+const axios = require('axios');
 
 class PaisService {
     static async create(data) {
-        return Pais.create(data);
+        return Paises.create(data);
     }
 
 
     static async findAll() {
-        return Pais.findAll();
+        return Paises.findAll();
     }
 
     static async loadAll() {
-        var options = {
-            method: 'GET',
-            url: process.env.API_URL + '/countries',
-            headers: {
-                'x-apisports-key': process.env.API_KEY
+        const response = await axios.get(
+            process.env.API_URL + '/countries',
+            {
+                headers: {
+                    'x-apisports-key': process.env.API_KEY
+                }
             }
-        };
+        );
 
-        request(options, function (error, response, body) {
-            if (error) throw new Error(error);
+        const countries = response.data;
 
-            const countries = JSON.parse(body);
+        await Paises.truncate();
 
-            countries.response.forEach(country => {
-                Pais.create({
+        await Promise.all(
+            countries.response.map(country =>
+                Paises.create({
                     nome: country.name,
                     codigo: country.code,
                     bandeira: country.flag
-                });
-            });
-        });
+                })
+            )
+        );
 
-        return Pais.findAll();
+        return await Paises.findAll();
     }
+
 }
 
 module.exports = PaisService;
