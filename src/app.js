@@ -1,13 +1,15 @@
 const express = require('express');
 const paisesRoutes = require('./routes/paises.routes');
 const ligasRoutes = require('./routes/ligas.routes');
-const LogAtualizacoesRoutes = require('./routes/logAtualizacoes.routes');
+const logAtualizacoesRoutes = require('./routes/logAtualizacoes.routes');
+const timesRoutes = require('./routes/times.routes');
 
 const app = express();
 
 app.use(express.json());
 app.use(paisesRoutes);
+app.use(timesRoutes);
 app.use(ligasRoutes);
-app.use(LogAtualizacoesRoutes);
+app.use(logAtualizacoesRoutes);
 
 module.exports = app;
