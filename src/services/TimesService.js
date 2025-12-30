@@ -13,26 +13,23 @@ class TimesService {
         return Times.findAll();
     }
 
-    static async loadAll() {
+    static async loadAll(pais) {
+        console.log('Carregando times para o pais: ' + pais);
         const response = await axios.get(
             process.env.API_URL + '/teams',
             {
                 headers: {
                     'x-apisports-key': process.env.API_KEY
                 },
-                params: {   
-                    country:'Brazil'
+                params: {
+                    country: pais
                 }
             }
         );
 
         const teams = response.data;
 
-
-
-        await Times.truncate();
-
-        await Promise.all(
+        /*await Promise.all(
             teams.response.map(team =>
                 Times.create({
                     idTime: team.team.id,
@@ -43,7 +40,20 @@ class TimesService {
                     logo: team.team.logo
                 })
             )
-        );
+            
+        );*/
+        let dados = teams.response.map(time => ({
+            idTime: time.team.id,
+            nome: time.team.name,
+            codigo: time.team.code,
+            paisDeOrigem: time.team.country,
+            selecaoNacional: time.team.national,
+            logo: time.team.logo
+        }));
+
+        await Times.bulkCreate(dados, {
+            updateOnDuplicate: ['nome', 'codigo', 'paisDeOrigem', 'selecaoNacional', 'logo']
+        });
 
         if (await LogService.find('Times')) {
             let dataAtualizacao = new Date();

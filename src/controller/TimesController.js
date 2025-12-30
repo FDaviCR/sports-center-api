@@ -22,8 +22,10 @@ class TimesController {
     }
 
     static async loadAll(req, res, next) {
+        const { pais } = req.query;
+
         try {
-            const Times = await TimesService.loadAll();
+            const Times = await TimesService.loadAll(pais);
             res.json(Times);
         } catch (err) {
             next(err);
