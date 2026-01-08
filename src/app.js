@@ -18,4 +18,5 @@ app.use(ligasRoutes);
 app.use(temporadasRoutes);
 app.use(logAtualizacoesRoutes);
 app.use(partidasRoutes);
+
 module.exports = app;
