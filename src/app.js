@@ -4,6 +4,8 @@ const ligasRoutes = require('./routes/ligas.routes');
 const logAtualizacoesRoutes = require('./routes/logAtualizacoes.routes');
 const timesRoutes = require('./routes/times.routes');
 const temporadasRoutes = require('./routes/temporadas.routes');
+const partidasRoutes = require('./routes/partidas.routes');
+
 
 const app = express();
 
@@ -15,5 +17,5 @@ app.use(timesRoutes);
 app.use(ligasRoutes);
 app.use(temporadasRoutes);
 app.use(logAtualizacoesRoutes);
-
+app.use(partidasRoutes);
 module.exports = app;
